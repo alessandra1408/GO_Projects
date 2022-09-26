@@ -3,13 +3,18 @@ package main
 import (
 	"fmt"
 	"math/rand"
+	"time"
 )
+
+var random_number int
 
 func guess(x int) {
 	max := 10
 	min := 0
+
+	rand.Seed(time.Now().UnixNano())
 	//essa variavel é criada e o primeiro valor alocado esta se mantendo. Resolver isso (provavel que esta assim devido a usar a marmotinha para atribuir valor)
-	random_number := (rand.Intn(max-min) + min)
+	random_number = (rand.Intn(max-min) + min)
 
 	guess := 0
 	for guess != random_number {
@@ -22,7 +27,7 @@ func guess(x int) {
 			fmt.Println("Sorry, guess again. Too High")
 		}
 	}
-	fmt.Printf("Yes, are right! The number is %d", random_number)
+	fmt.Printf("Yes, are right! The number is %d\n", random_number)
 }
 
 func main() {
