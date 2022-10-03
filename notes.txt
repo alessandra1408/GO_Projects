@@ -1,0 +1,8 @@
+"# é titulo"
+"## hierarquia de titulos"
+"** é negrito **"
+"* é tópico"
+" `` é codigo de 1 linha"
+"inicio de codigo: ~~~go"
+"fim de codigo: ~~~"
+"link com texto personalizado: [texto personalizado] (link)"
