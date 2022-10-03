@@ -1,9 +1,13 @@
 # 12-Projetos-Iniciasi-GO
 
-Ola este é um teste
+Projetos para desenvolver os estudos na linguagem go
 
-![Tópicos]
+### Como instalar o GO
+* https://go.dev/doc/install
 
+### Projetos construídos
 
-* Madlibs
-s
+* [Madlibs](https://github.com/alessandra1408/12-Projetos-Iniciais-GO/tree/main/madlibs)
+* [Random Number](https://github.com/alessandra1408/12-Projetos-Iniciais-GO/tree/main/random)
+* [Computer Guess](https://github.com/alessandra1408/12-Projetos-Iniciais-GO/tree/main/computer_guess)
+
