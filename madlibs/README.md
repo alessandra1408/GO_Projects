@@ -4,7 +4,7 @@ Projeto para concatenar uma palavra de diferentes formas
 
 ### Para executar
 
-Entrar na pasta que o projeto está e rode:
+Entrar na pasta do projeto e rode:
 
 `go run madlibs.go`
 

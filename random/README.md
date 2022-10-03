@@ -4,7 +4,7 @@ Projeto para gerar um número aleatório e o usuário tentar adivinhar
 
 ### Para executar
 
-Entrar na pasta que o projeto está e rode:
+Entrar na pasta do projeto e rode:
 
 `go run main.go`
 
