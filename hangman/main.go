@@ -7,14 +7,29 @@ import (
 	"time"
 )
 
+func welcomePlayer() {
+	asciiArt := `
+	 _   _    _    _   _  ____ __  __    _    _   _
+	| | | |  / \  | \ | |/ ___|  \/  |  / \  | \ | |
+	| |_| | / _ \ |  \| | |  _| |\/| | / _ \ |  \| |
+	|  _  |/ ___ \| |\  | |_| | |  | |/ ___ \| |\  |
+	|_| |_/_/   \_\_| \_|\____|_|  |_/_/   \_\_| \_|
+	`
+	fmt.Println(asciiArt)
+}
+
 func selectLanguage() []string {
 	var arrayInput = []string{}
 	languageOption := 0
 
-	fmt.Println("** Language Selection **")
+	fmt.Println("\n** Language Selection **")
 	fmt.Println("1 - English")
 	fmt.Println("2 - Português")
-	fmt.Scan(&languageOption)
+	languageOption, err := fmt.Scan(&languageOption)
+
+	if err != nil {
+		fmt.Println("elect only one of the options.")
+	}
 
 	switch languageOption {
 	case 1:
@@ -29,11 +44,6 @@ func selectLanguage() []string {
 
 func getValidWords(arrayInput []string) []string {
 
-	//se for array pt-br
-	//fazer um loop for para:
-	//todas as posições do array menores que 3 serem excluídas
-	//gerar um novo array com essas novas palavras
-
 	var validWords []string
 
 	for i := 0; i < len(arrayInput); i++ {
@@ -46,59 +56,112 @@ func getValidWords(arrayInput []string) []string {
 
 }
 
-func welcomePlayer() {
-	asciiArt := `
-	 _   _    _    _   _  ____ __  __    _    _   _
-	| | | |  / \  | \ | |/ ___|  \/  |  / \  | \ | |
-	| |_| | / _ \ |  \| | |  _| |\/| | / _ \ |  \| |
-	|  _  |/ ___ \| |\  | |_| | |  | |/ ___ \| |\  |
-	|_| |_/_/   \_\_| \_|\____|_|  |_/_/   \_\_| \_|
-	`
-	fmt.Println(asciiArt)
-}
-
-func hangman(validArray []string) {
-
-	var usedLetters = []string{}
+func generatWord(validArray []string) string {
 
 	rand.Seed(time.Now().UTC().UnixNano())
 	randWord := rand.Intn(len(validArray))
 	generatedWord := validArray[randWord]
+	generatedWord = string(generatedWord)
 
+	return generatedWord
+}
+
+// func pictures() {
+// 	//do something
+// 	fmt.Println(`+---+
+// 						|
+// 						|
+// 						|
+// 					===`)
+// }
+
+func endGame(result bool) {
+	fmt.Println("ending the game...")
+	time.Sleep(2 * time.Second)
+	fmt.Print("\033[H\033[2J")
+
+	if result {
+		asciiArt := "Congrats. You Won!"
+		fmt.Println(asciiArt)
+	} else {
+		fmt.Println("You lose!")
+	}
+}
+
+func game(validArray []string) bool {
 	var letters string
-	fmt.Println("Try to guess de word!")
+	var usedLetters []string
+	generatedWord := generatWord(validArray)
+	life := 5
+	match := false
 
-	for vida := 5; vida > 0; vida-- {
+	wordShow := make([]string, 0)
+
+	for i := 0; i < len(generatedWord); i++ {
+		wordShow = append(wordShow, "-")
+	}
+
+	for {
+		hit := false
+		fmt.Println(wordShow)
 		fmt.Scanln(&letters)
+		letters = strings.ToLower(letters)
+		usedLetters = append(usedLetters, letters)
+		usedLettersConcat := strings.Join(usedLetters, " ")
+		fmt.Print("\033[H\033[2J")
+		fmt.Printf("\n==============\nLIFES: %d\nletters used: %v\n==============\n", life, usedLettersConcat)
+		fmt.Println()
+		fmt.Println("Try to guess de word!")
 
+		//verificadores
 		if len(letters) != 1 {
-			fmt.Println("You can only use one letter at a time! You lsot a life.")
+			fmt.Println("You can only use one letter at a time!")
+			continue
+		}
 
-		} else {
+		for k, v := range generatedWord {
+			if string(v) == letters {
+				wordShow[k] = string(v)
+				hit = true
+			}
+		}
 
-			for i := 0; i != len(generatedWord); i++ {
+		if !hit {
+			life--
+		}
 
-				if string(letters) == string(generatedWord[i]) {
-					fmt.Printf("a letra %v tem na palavra!\n", letters)
+		if life <= 0 {
+			match = false
+			break
+		}
+
+		count := 0
+		for _, v := range wordShow {
+			if v != "-" {
+				count++
+
+				if count == len(wordShow) {
+					match = true
+					break
 				}
 
-				fmt.Printf("_ ")
+			} else {
+				count = 0
 			}
+		}
 
-			fmt.Println()
-			fmt.Println(generatedWord)
-
-			usedLetters = append(usedLetters, letters)
-			usedLettersConcat := strings.Join(usedLetters, " ")
-			fmt.Printf("You have used these letters: %v\n", usedLettersConcat)
+		if match {
+			break
 		}
 	}
 
+	return match
 }
 
 func main() {
 	welcomePlayer()
 	arrayInput := selectLanguage()
 	validArray := getValidWords(arrayInput)
-	hangman(validArray)
+	result := game(validArray)
+	endGame(result)
 }
