@@ -66,15 +66,6 @@ func generatWord(validArray []string) string {
 	return generatedWord
 }
 
-// func pictures() {
-// 	//do something
-// 	fmt.Println(`+---+
-// 						|
-// 						|
-// 						|
-// 					===`)
-// }
-
 func endGame(result bool) {
 	fmt.Println("ending the game...")
 	time.Sleep(2 * time.Second)
