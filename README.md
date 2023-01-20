@@ -36,5 +36,5 @@ Caso preferir não baixar o go, pode usar o playground para executar e se divert
 - [Madlibs](https://github.com/alessandra1408/12-Projetos-Iniciais-GO/tree/main/madlibs)
 - [Random Number](https://github.com/alessandra1408/12-Projetos-Iniciais-GO/tree/main/random)
 - [Computer Guess](https://github.com/alessandra1408/12-Projetos-Iniciais-GO/tree/main/computer_guess)
-- [Rock paper and Scissors](https://github.com/alessandra1408/GO_Projects/tree/main/rock_paper_scissors)-
-  [Hangman](https://github.com/alessandra1408/GO_Projects/tree/main/hangman)
+- [Rock paper and Scissors](https://github.com/alessandra1408/GO_Projects/tree/main/rock_paper_scissors)
+- [Hangman](https://github.com/alessandra1408/GO_Projects/tree/main/hangman)
